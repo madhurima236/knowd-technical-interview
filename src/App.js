@@ -2,7 +2,8 @@ import "./App.css";
 import { SiGmail, SiStripe, SiAmazon } from "react-icons/si";
 import { Stripe, Gmail, Alexa } from "./dataset";
 import TicketRow from "./components/TicketRow";
-import TicketTable from "./components/TicketTable";
+// import TicketTable from "./components/TicketTable";
+import FilterableTicketTable from "./components/FilterableTicketTable";
 
 function App() {
   const exampleTicket = {
@@ -48,8 +49,8 @@ function App() {
       </div>
 
       <div>
-        <h1>Ticket Table Example</h1>
-        <TicketTable tickets={ticketArray} />
+        <h1>Customer Tickets</h1>
+        <FilterableTicketTable tickets={ticketArray} />
       </div>
     </div>
   );
