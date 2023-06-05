@@ -1,17 +1,12 @@
 import "./App.css";
 import { SiGmail, SiStripe, SiAmazon } from "react-icons/si";
 import { Stripe, Gmail, Alexa } from "./dataset";
-import TicketRow from "./components/TicketRow";
-// import TicketTable from "./components/TicketTable";
 import FilterableTicketTable from "./components/FilterableTicketTable";
+import { Search, Engine } from "./search-engine";
+import SearchInput from "./components/SearchInput";
+import { useState } from "react";
 
 function App() {
-  const exampleTicket = {
-    type: "Gmail",
-    text: "Can't delete all emails at once",
-    icon: <SiGmail />,
-  };
-
   const ticketArray = [];
 
   // Merge Stripe tickets
@@ -19,6 +14,7 @@ function App() {
     ticketArray.push({
       type: "Stripe",
       text: ticket,
+      icon: <SiStripe />,
     });
   });
 
@@ -27,6 +23,7 @@ function App() {
     ticketArray.push({
       type: "Gmail",
       text: ticket,
+      icon: <SiGmail />,
     });
   });
 
@@ -35,22 +32,43 @@ function App() {
     ticketArray.push({
       type: "Alexa",
       text: ticket,
+      icon: <SiAmazon />,
     });
   });
+
+  const [searchResults, setSearchResults] = useState([]);
+  const engine = Engine(ticketArray);
+
+  // Get the text from docs based on the result array
+  const getTextFromResults = (results, docs) => {
+    const texts = [];
+
+    for (const result of results) {
+      const id = result[0];
+      const index = parseInt(id, 10); // Convert id to a number
+      if (index >= 0 && index < docs.length) {
+        texts.push(docs[index]);
+      } else {
+        texts.push("Invalid index");
+      }
+    }
+
+    return texts;
+  };
+
+  const onSearch = (query) => {
+    const result = Search(engine, query);
+    setSearchResults(getTextFromResults(result, ticketArray));
+  };
 
   return (
     <div className="h-screen bg-gray-100 flex items-center justify-center">
       <h1 className={"text-5xl"}>Knowd Technical Interview</h1>
 
       <div>
-        <h2>Ticket Row Example</h2>
-        <TicketRow ticket={exampleTicket} />{" "}
-        {/* Render the ticket row component */}
-      </div>
-
-      <div>
         <h1>Customer Tickets</h1>
-        <FilterableTicketTable tickets={ticketArray} />
+        <SearchInput onSearch={onSearch} />
+        <FilterableTicketTable tickets={searchResults} />
       </div>
     </div>
   );

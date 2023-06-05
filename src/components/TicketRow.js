@@ -1,8 +1,12 @@
 import React from "react";
 
-const TicketRow = ({ ticket }) => {
+const TicketRow = ({ index, ticket }) => {
+  console.log(ticket);
   return (
-    <div>
+    <div
+      key={index}
+      className="flex flex-col bg-white shadow-lg rounded-lg overflow-hidden"
+    >
       {/* Render the icon component */}
       {ticket.icon}
 

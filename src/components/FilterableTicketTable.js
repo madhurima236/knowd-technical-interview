@@ -3,23 +3,23 @@ import TicketTable from "./TicketTable";
 import TicketTypeSelector from "./TicketTypeSelector";
 
 const FilterableTicketTable = ({ tickets }) => {
-  const [selectedType, setSelectedType] = useState("All");
+  const [filter, setFilter] = useState("All");
 
-  const handleTypeChange = (e) => {
-    setSelectedType(e.target.value);
+  const handleFilterChange = (e) => {
+    setFilter(e.target.value);
   };
 
   const filteredTickets = tickets.filter((ticket) => {
-    if (selectedType === "All") {
+    if (filter === "All") {
       return true;
     }
 
-    return ticket.type === selectedType;
+    return ticket.type === filter;
   });
 
   return (
     <div>
-      <TicketTypeSelector onChange={handleTypeChange} />
+      <TicketTypeSelector onChange={handleFilterChange} />
       <TicketTable tickets={filteredTickets} />
     </div>
   );
