@@ -18,9 +18,13 @@ const FilterableTicketTable = ({ tickets }) => {
   });
 
   return (
-    <div>
-      <TicketTypeSelector onChange={handleFilterChange} />
-      <TicketTable tickets={filteredTickets} />
+    <div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-white border rounded-md shadow-md w-1/3 max-h-64 overflow-y-auto">
+      <div className="flex justify-center p-2">
+        <TicketTypeSelector onChange={handleFilterChange} />
+      </div>
+      <div className="overflow-y-auto">
+        <TicketTable tickets={filteredTickets} />
+      </div>
     </div>
   );
 };

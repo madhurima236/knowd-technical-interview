@@ -62,12 +62,16 @@ function App() {
   };
 
   return (
-    <div className="h-screen bg-gray-100 flex items-center justify-center">
-      <h1 className={"text-5xl"}>Knowd Technical Interview</h1>
-
-      <div>
-        <h1>Customer Tickets</h1>
+    <div className="h-screen bg-gray-100 flex flex-col">
+      <div className="flex justify-start">
+        <h1 className="text-xl font-bold text-blue-900 mt-4 ml-4">
+          Knowd Technical Interview
+        </h1>
+      </div>
+      <div className="flex justify-center items-center box">
         <SearchInput onSearch={onSearch} />
+      </div>
+      <div className="flex-grow">
         <FilterableTicketTable tickets={searchResults} />
       </div>
     </div>
