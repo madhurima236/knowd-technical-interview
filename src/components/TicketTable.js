@@ -34,9 +34,6 @@ const TicketTable = ({ tickets }) => {
                 </div>
             ))}
             <Modal show={showModal} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>{selectedTicket?.text}</Modal.Title>
-                </Modal.Header>
                 <Modal.Body>
                     {selectedTicket && (
                         <div>
