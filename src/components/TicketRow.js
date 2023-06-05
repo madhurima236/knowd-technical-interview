@@ -1,7 +1,6 @@
 import React from "react";
 
 const TicketRow = ({ index, ticket }) => {
-  console.log(ticket);
   return (
     <div
       key={index}
