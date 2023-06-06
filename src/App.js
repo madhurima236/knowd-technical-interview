@@ -4,7 +4,8 @@ import { Stripe, Gmail, Alexa } from "./dataset";
 import FilterableTicketTable from "./components/FilterableTicketTable";
 import { Search, Engine } from "./search-engine";
 import SearchInput from "./components/SearchInput";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import useInfiniteScroll from "./hooks/useInfiniteScroll";
 
 function App() {
   const ticketArray = [];
@@ -36,29 +37,20 @@ function App() {
     });
   });
 
-  const [searchResults, setSearchResults] = useState([]);
   const engine = Engine(ticketArray);
-
-  // Get the text from docs based on the result array
-  const getTextFromResults = (results, docs) => {
-    const texts = [];
-
-    for (const result of results) {
-      const id = result[0];
-      const index = parseInt(id, 10); // Convert id to a number
-      if (index >= 0 && index < docs.length) {
-        texts.push(docs[index]);
-      } else {
-        texts.push("Invalid index");
-      }
-    }
-
-    return texts;
-  };
+  const [searchResults, setSearchResults] = useState([]);
+  const { tickets, hasMore, loadMore, setQuery } = useInfiniteScroll(
+    10,
+    engine,
+    ticketArray
+  );
+    
+  useEffect(() => {
+    setSearchResults(tickets);
+  }, [tickets]);
 
   const onSearch = (query) => {
-    const result = Search(engine, query);
-    setSearchResults(getTextFromResults(result, ticketArray));
+    setQuery(query);
   };
 
   return (
@@ -73,6 +65,16 @@ function App() {
       </div>
       <div className="flex-grow">
         <FilterableTicketTable tickets={searchResults} />
+        {hasMore && (
+          <div className="flex justify-center">
+            <button
+              className="bg-blue-500 text-white rounded px-4 py-2"
+              onClick={loadMore}
+            >
+              Load More
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

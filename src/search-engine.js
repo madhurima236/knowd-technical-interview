@@ -41,8 +41,8 @@ export const Engine = (docs) => {
 };
 
 // Provide a search function
-export const Search = (engine, query) => {
+export const Search = (engine, query, k) => {
   // return the top 100 results
-  const results = engine.search(query, 100);
+  const results = engine.search(query, k);
   return results;
 };
