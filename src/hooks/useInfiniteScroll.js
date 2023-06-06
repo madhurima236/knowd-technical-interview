@@ -24,6 +24,7 @@ const useInfiniteScroll = (initialK, engine, ticketArray) => {
   const [query, setQuery] = useState("");
 
   const loadMore = () => {
+    setHasMore(false);
     setK((prevK) => prevK + 10);
   };
 
@@ -48,13 +49,12 @@ const useInfiniteScroll = (initialK, engine, ticketArray) => {
   //       loadMore();
   //     }
   //   };
-  
+
   //   window.addEventListener("scroll", handleScroll);
   //   return () => {
   //     window.removeEventListener("scroll", handleScroll);
   //   };
   // }, []);
-  
 
   return { tickets, hasMore, loadMore, setQuery };
 };

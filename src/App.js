@@ -39,7 +39,7 @@ function App() {
 
   const engine = Engine(ticketArray);
   const [searchResults, setSearchResults] = useState([]);
-  const { tickets, hasMore, loadMore, setQuery } = useInfiniteScroll(
+  const { tickets, hasMore, loadMore, setQuery} = useInfiniteScroll(
     10,
     engine,
     ticketArray
@@ -60,21 +60,11 @@ function App() {
           Knowd Technical Interview
         </h1>
       </div>
-      <div className="flex justify-center items-center box">
+      <div className="flex justify-center items-center box mt-10">
         <SearchInput onSearch={onSearch} />
       </div>
       <div className="flex-grow">
-        <FilterableTicketTable tickets={searchResults} />
-        {hasMore && (
-          <div className="flex justify-center">
-            <button
-              className="bg-blue-500 text-white rounded px-4 py-2"
-              onClick={loadMore}
-            >
-              Load More
-            </button>
-          </div>
-        )}
+              <FilterableTicketTable tickets={tickets} loadMore={loadMore} hasMore={hasMore} />
       </div>
     </div>
   );

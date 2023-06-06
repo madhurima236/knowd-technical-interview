@@ -55,6 +55,7 @@ const TicketTable = ({ tickets }) => {
   //     };
   //   }, [currIndex, tickets]);
 
+
   const handleCloseModal = () => {
     setShowModal(false);
     setSelectedTicket(null);
@@ -62,20 +63,19 @@ const TicketTable = ({ tickets }) => {
 
   return (
     <div>
-      <div className="max-h-[400px] overflow-y-auto">
+      <div className="max-h-[400px]">
         {tickets.map((ticket, index) => (
           <div key={index} onClick={() => handleTicketClick(ticket)}>
             <TicketRow index={index} ticket={ticket} />
           </div>
         ))}
       </div>
-      <div className="max-w-200 h-300">
+      <div>
         {showModal && (
           <TicketModal
             showModal={showModal}
             handleClose={handleCloseModal}
-                      selectedTicket={selectedTicket}
-                      className="max-w-200 h-300"
+            selectedTicket={selectedTicket}
           />
         )}
       </div>
