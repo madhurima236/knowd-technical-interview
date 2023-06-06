@@ -38,22 +38,22 @@ const useInfiniteScroll = (initialK, engine, ticketArray) => {
     fetchTickets();
   }, [k, query]);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const { scrollHeight, clientHeight, scrollTop } = document.documentElement;
-      console.log("scrollHeight", scrollHeight);
-      console.log("clientHeight", clientHeight);
-      console.log("scrollTop", scrollTop);
-      if (scrollTop + clientHeight >= scrollHeight - 100) {
-        loadMore();
-      }
-    };
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const { scrollHeight, clientHeight, scrollTop } = document.documentElement;
+  //     console.log("scrollHeight", scrollHeight);
+  //     console.log("clientHeight", clientHeight);
+  //     console.log("scrollTop", scrollTop);
+  //     if (scrollTop + clientHeight >= scrollHeight - 100) {
+  //       loadMore();
+  //     }
+  //   };
   
-    window.addEventListener("scroll", handleScroll);
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => {
+  //     window.removeEventListener("scroll", handleScroll);
+  //   };
+  // }, []);
   
 
   return { tickets, hasMore, loadMore, setQuery };

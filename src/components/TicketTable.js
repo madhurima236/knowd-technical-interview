@@ -55,23 +55,30 @@ const TicketTable = ({ tickets }) => {
   //     };
   //   }, [currIndex, tickets]);
 
-  const handleClose = () => {
+  const handleCloseModal = () => {
     setShowModal(false);
     setSelectedTicket(null);
   };
 
   return (
-    <div className="max-h-[400px] overflow-y-auto">
-      {tickets.map((ticket, index) => (
-        <div key={index} onClick={() => handleTicketClick(ticket)}>
-          <TicketRow index={index} ticket={ticket} />
-        </div>
-      ))}
-      <TicketModal
-        showModal={showModal}
-        handleClose={handleClose}
-        selectedTicket={selectedTicket}
-      />
+    <div>
+      <div className="max-h-[400px] overflow-y-auto">
+        {tickets.map((ticket, index) => (
+          <div key={index} onClick={() => handleTicketClick(ticket)}>
+            <TicketRow index={index} ticket={ticket} />
+          </div>
+        ))}
+      </div>
+      <div className="max-w-200 h-300">
+        {showModal && (
+          <TicketModal
+            showModal={showModal}
+            handleClose={handleCloseModal}
+                      selectedTicket={selectedTicket}
+                      className="max-w-200 h-300"
+          />
+        )}
+      </div>
     </div>
   );
 };

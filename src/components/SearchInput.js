@@ -10,7 +10,7 @@ const SearchInput = ({ onSearch }) => {
 
   return (
       <input
-        className="w-1/3 h-10 px-3 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+        className="w-2/3 h-10 px-3 text-base placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
         placeholder="Search for anything..."
         type="text"
         autoCapitalize="false"

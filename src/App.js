@@ -54,7 +54,7 @@ function App() {
   };
 
   return (
-    <div className="h-screen bg-gray-100 flex flex-col">
+    <div className="h-screen bg-gray-100 overflow-y-auto flex flex-col">
       <div className="flex justify-start">
         <h1 className="text-xl font-bold text-blue-900 mt-4 ml-4">
           Knowd Technical Interview
